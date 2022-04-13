@@ -1,0 +1,101 @@
+#: kivy 2.0.0
+#: import ew kivy.uix.effectwidget
+
+<Card@BoxLayout>:
+    Label:
+        size_hint: 1, 1
+        pos_hint: {'right':1, 'top':1}
+        hint_text: 'В'
+        opacity: 0.95
+        focus: True
+
+<Screen>:
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/bg.jpg'
+
+    FloatLayout:
+        #size_hint: 0.98, 0.98
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        BoxLayout:
+            orientation: 'vertical'
+            #size_hint: 0.98, 0.98
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.05
+                Label:
+                    #size_hint: 1, 1
+                    #pos_hint: {'right':1, 'top':1}
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                    hint_text: 'Scan games by Year 20'
+                    text: 'Scan games by Year 20'
+                    #opacity: 0.95
+                    focus: True
+                TextInput:
+                    multiline: False
+                    pos_hint: {'center_x':.5, 'center_y':.5}
+                    size_hint: 0.12, 1
+                Button:
+                    pos_hint: {'center_x':.5, 'center_y':.5}
+                    #size_hint: 0.1, 0.1
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'middle'
+                    text: 'Scan games'
+                    on_release:
+                        root.scan_games()
+                Button:
+                    pos_hint: {'center_x':.5, 'center_y':.5}
+                    #size_hint: 0.1, 0.1
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'middle'
+                    text: 'Load from Database'
+                    on_release:
+                        root.get_games_from_db()
+            FloatLayout:
+                orientation: 'horizontal'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                #padding: 20
+                #spacing: 20
+                #size_hint: 0.98, 0.98
+                #pos_hint: {'center_x':.5, 'center_y':.5}
+                FloatLayout:
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    canvas:
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: 'assets/bg.jpg'
+                    Button:
+                        id: btn_prev
+                        pos_hint: {'x': 0, 'center_y': .5}
+                        size_hint_x: 0.1
+                        text: '<<'
+                        background_color: 0, 0, 0, 0.5
+                        on_release:
+                            root.prev_game()
+                            #root.textinput_widget.focus = False
+
+                    Button:
+                        id: btn_next
+                        pos_hint: {'right': 1, 'center_y':.5}
+                        size_hint_x: 0.1
+                        text: '>>'
+                        background_color: 0, 0, 0, 0.5
+                        on_release:
+                            root.next_game()
+                            #root.textinput_widget.focus = False
+
+
