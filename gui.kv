@@ -10,6 +10,11 @@
         focus: True
 
 <Screen>:
+
+    text_year: text
+    start_test_label: label_test
+    pic: picture
+
     canvas:
         Rectangle:
             pos: self.pos
@@ -33,6 +38,8 @@
                 orientation: 'horizontal'
                 size_hint_y: 0.05
                 Label:
+                    id: label_test
+                    hint_text: '22'
                     #size_hint: 1, 1
                     #pos_hint: {'right':1, 'top':1}
                     text_size: self.size
@@ -43,6 +50,7 @@
                     #opacity: 0.95
                     focus: True
                 TextInput:
+                    id: text
                     multiline: False
                     pos_hint: {'center_x':.5, 'center_y':.5}
                     size_hint: 0.12, 1
@@ -55,6 +63,7 @@
                     text: 'Scan games'
                     on_release:
                         root.scan_games()
+
                 Button:
                     pos_hint: {'center_x':.5, 'center_y':.5}
                     #size_hint: 0.1, 0.1
@@ -73,11 +82,16 @@
                 #pos_hint: {'center_x':.5, 'center_y':.5}
                 FloatLayout:
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    canvas:
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                            source: 'assets/bg.jpg'
+                    Image:
+                        id: picture
+                        pos: self.pos
+                        size: self.size
+                        source: 'assets/bg.jpg'
+                    #canvas:
+                    #    Rectangle:
+                    #        pos: self.pos
+                    #        size: self.size
+                    #        source: 'assets/bg.jpg'
                     Button:
                         id: btn_prev
                         pos_hint: {'x': 0, 'center_y': .5}
