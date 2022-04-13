@@ -1,6 +1,6 @@
 import db_full
 import pyParser
-import requests
+import os
 
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -15,6 +15,7 @@ print(size)
 
 class Screen(FloatLayout):
     cards = []
+    img_count = 0
 
     def scan_games(self, year='22'):
         year = self.text_year.text
@@ -25,26 +26,37 @@ class Screen(FloatLayout):
 
     def get_games_from_db(self):
         self.cards = db_full.db_select_all_data('games')
-        #назначаем картинку
-        #self.pic.canvas.source =
-        print(type(self.cards))
-        #for card in self.cards:
-        #    print(card)
-        print('downloading...', self.cards[0][2])
-        self.img_downloader(self.cards[0][2])
-        self.pic.source = 'assets/img.jpg'
+        filename = 'assets/' + self.cards[self.img_count][0] + '.jpg'
+        pyParser.img_downloader(self.cards[self.img_count][0], self.cards[self.img_count][2])
+        self.pic.source = 'assets/' + self.cards[self.img_count][0] + '.jpg'
 
     def next_game(self):
-        print('next')
+        #получить список ссылок из базы и по нему итерироваться меняя глобальный счётчик
+        self.img_count += 1
+        filename = 'assets/' + self.cards[self.img_count][0] + '.jpg'
+
+        if os.path.exists(filename):
+            self.pic.source = filename
+        else:
+            # this would throw the exception
+            print('Downloading', filename, '...', end='')
+            print('Done')
+            pyParser.img_downloader(self.cards[self.img_count][0], self.cards[self.img_count][2])
+            self.pic.source = 'assets/' + self.cards[self.img_count][0] + '.jpg'
 
     def prev_game(self):
-        print('prev')
+        #получить список ссылок из базы и по нему итерироваться меняя глобальный счётчик
+        self.img_count -= 1
+        filename = 'assets/' + self.cards[self.img_count][0] + '.jpg'
 
-    def img_downloader(self, link):
-        p = requests.get(link)
-        out = open("assets/img.jpg", "wb")
-        out.write(p.content)
-        out.close()
+        if os.path.exists(filename):
+            self.pic.source = filename
+        else:
+            # this would throw the exception
+            print('Downloading', filename, '...', end='')
+            print('Done')
+            pyParser.img_downloader(self.cards[self.img_count][0], self.cards[self.img_count][2])
+            self.pic.source = 'assets/' + self.cards[self.img_count][0] + '.jpg'
 
 
 class GuiApp(App):
@@ -52,7 +64,6 @@ class GuiApp(App):
         return Screen()
 
     def on_start(self, **kwargs):
-        print(dir(self.root))
         self.root.text_year.text = '22'
         self.root.get_games_from_db()
 

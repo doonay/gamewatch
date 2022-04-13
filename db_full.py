@@ -7,7 +7,7 @@ def db_create_connection(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-    except Error as e:
+    except sqlite3.Error as e:
         print(e)
 
     return conn
@@ -29,12 +29,15 @@ def db_data_add(conn, list_of_games): #list of cortages
   conn.commit()
 
 """ Получение всех данных из таблицы """
-def db_select_all_data(conn, table_name):
+def db_select_all_data(table_name):
   #Функцию fetchall() можно использовать для получения всех результатов.
-  cur = conn.cursor()
-  cur.execute("SELECT * FROM games;")
-  all_results = cur.fetchall()
-  print(all_results)
+  conn = db_create_connection('database.db')
+  with conn:
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM " + table_name)
+    all_results = cur.fetchall()
+
+  return all_results
 
 """ Удаление данных в SQLite в Python """
 def db_delete_data(conn, name):
@@ -46,6 +49,7 @@ def db_delete_data(conn, name):
 #-------------------------------------------------- TESTS ------------------------------------------
 
 def main():
+
   """ Создание, либо открытие существующей базы (в файле) """
   database = "database.db"
   conn = db_create_connection(database)
