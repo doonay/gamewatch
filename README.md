@@ -18,4 +18,5 @@
 ![image](https://user-images.githubusercontent.com/18138614/163537996-80ac2944-8087-4b22-9828-532a6b341f35.png)
 ![image](https://user-images.githubusercontent.com/18138614/163538160-2db66dc6-f11c-46e3-a62b-bbbdc1c9b0f2.png)
 ![image](https://user-images.githubusercontent.com/18138614/163538127-803e4af1-81cd-4162-a702-5d3b68a54b9e.png)
-
+Макет всего окна
+![image](https://user-images.githubusercontent.com/18138614/163540087-44a6b75b-c30d-4f9a-95d6-946546d8f4ba.png)
