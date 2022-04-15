@@ -1,115 +1,137 @@
 #: kivy 2.0.0
 #: import ew kivy.uix.effectwidget
+#: import KivyMD kivymd.app.MDApp
 
-<Card@BoxLayout>:
-    Label:
-        size_hint: 1, 1
-        pos_hint: {'right':1, 'top':1}
-        hint_text: 'В'
-        opacity: 0.95
-        focus: True
+<Card@RelativeLayout>:
 
-<Screen>:
+    #size_hint: 0.97, 0.97
+    #spacing: 10
 
-    text_year: text
-    start_test_label: label_test
-    pic: picture
+    #pos_hint: {'center_x': .5, 'center_y': .5}
 
-    canvas:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'assets/bg.jpg'
+
 
     FloatLayout:
-        #size_hint: 0.98, 0.98
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        canvas:
-            Color:
-                rgba: 0, 0, 0, 1
-            Rectangle:
-                size: self.size
-                pos: self.pos
+        orientation: 'vertical'
+        Label:
+            pos_hint: {'x': 0.01, 'y': .05}
+            text_size: self.size
+            font_size: '20sp'
+            halign: 'left'
+            valign: 'bottom'
+            markup: True
+            text: '[b]' + 'Game Name III' + '[/b]'
+        Label:
+            pos_hint: {'x': 0.01, 'y': .01}
+            text_size: self.size
+            font_size: '18sp'
+            halign: 'left'
+            valign: 'bottom'
+            markup: True
+            text: 'YEAR'
+
+<Img@RelativeLayout>:
+    FitImage:
+        source: 'assets/bg.jpg'
+    FitImage:
+        source: 'assets/shadow_bottom.png'
+    FitImage:
+        source: 'assets/shadow_top.png'
+    FitImage:
+        source: 'assets/shadow_left.png'
+    FitImage:
+        source: 'assets/shadow_right.png'
+
+
+
+
+<Screen>: #FloatLayout
+
+    game_img: game_img_wgt
+    game_name: game_name_wgt
+    list: list_wgt
+
+    FitImage:
+        source: 'assets/bg.jpg'
+
+    BoxLayout:
+        size_hint: 0.97, 0.97
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        spacing: 10
+        orientation: 'horizontal'
         BoxLayout:
+            size_hint: 0.3, 1
+            orientation: 'horizontal'
+            ScrollView:
+                MDList:
+                    id: list_wgt
+
+
+        BoxLayout:
+            #size_hint: 0.97, 0.97
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            spacing: 10
             orientation: 'vertical'
-            #size_hint: 0.98, 0.98
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: 0.05
-                Label:
-                    id: label_test
-                    hint_text: '22'
-                    #size_hint: 1, 1
-                    #pos_hint: {'right':1, 'top':1}
-                    text_size: self.size
-                    halign: 'right'
-                    valign: 'middle'
-                    hint_text: 'Scan games by Year 20'
-                    text: 'Scan games by Year 20'
-                    #opacity: 0.95
-                    focus: True
-                TextInput:
-                    id: text
-                    multiline: False
-                    pos_hint: {'center_x':.5, 'center_y':.5}
-                    size_hint: 0.12, 1
-                Button:
-                    pos_hint: {'center_x':.5, 'center_y':.5}
-                    #size_hint: 0.1, 0.1
-                    text_size: self.size
-                    halign: 'center'
-                    valign: 'middle'
-                    text: 'Scan games'
-                    on_release:
-                        root.scan_games()
 
-                Button:
-                    pos_hint: {'center_x':.5, 'center_y':.5}
-                    #size_hint: 0.1, 0.1
-                    text_size: self.size
-                    halign: 'center'
-                    valign: 'middle'
-                    text: 'Load from Database'
-                    on_release:
-                        root.get_games_from_db()
-            FloatLayout:
-                orientation: 'horizontal'
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                #padding: 20
-                #spacing: 20
-                #size_hint: 0.98, 0.98
-                #pos_hint: {'center_x':.5, 'center_y':.5}
+            Card:
+                #size_hint: 0.97, 0.97
+                #spacing: 10
+
+                #pos_hint: {'center_x': .5, 'center_y': .5}
+                FitImage:
+                    id: game_img_wgt
+                    source: 'assets/bg.jpg'
+                FitImage:
+                    source: 'assets/shadow_bottom.png'
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    FloatLayout:
+                        #pos_hint: {'top': 1, 'right': 1}
+                        #size_hint: 0.5, 0.5
+                        BoxLayout:
+                            pos_hint: {'top': 1, 'right': 1}
+                            size_hint: 0.5, 0.1
+                            Button:
+                                background_normal: ''
+                                background_color: 1, 0, 0, .85
+                                text: 'Delete from base'
+                            Button:
+                                background_normal: ''
+                                background_color: 0, 1, 0, .85
+                                text: 'Add for watch'
                 FloatLayout:
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    Image:
-                        id: picture
-                        pos: self.pos
-                        size: self.size
-                        source: 'assets/bg.jpg'
-                    #canvas:
-                    #    Rectangle:
-                    #        pos: self.pos
-                    #        size: self.size
-                    #        source: 'assets/bg.jpg'
-                    Button:
-                        id: btn_prev
-                        pos_hint: {'x': 0, 'center_y': .5}
-                        size_hint_x: 0.1
-                        text: '<<'
-                        background_color: 0, 0, 0, 0.5
-                        on_release:
-                            root.prev_game()
-                            #root.textinput_widget.focus = False
-
-                    Button:
-                        id: btn_next
-                        pos_hint: {'right': 1, 'center_y':.5}
-                        size_hint_x: 0.1
-                        text: '>>'
-                        background_color: 0, 0, 0, 0.5
-                        on_release:
-                            root.next_game()
-                            #root.textinput_widget.focus = False
+                    orientation: 'vertical'
+                    Label:
+                        id: game_name_wgt
+                        pos_hint: {'x': 0.01, 'y': .05}
+                        text_size: self.size
+                        font_size: '20sp'
+                        halign: 'left'
+                        valign: 'bottom'
+                        markup: True
+                        text: '[b]' + 'Game Name III' + '[/b]'
+                    Label:
+                        pos_hint: {'x': 0.01, 'y': .01}
+                        text_size: self.size
+                        font_size: '18sp'
+                        halign: 'left'
+                        valign: 'bottom'
+                        markup: True
+                        text: 'YEAR'
 
 
+            BoxLayout:
+                size_hint: 1, 0.4
+                #pos_hint: {'center_x': .5, 'center_y': .5}
+                spacing: 10
+                orientation: 'horizontal'
+                Img:
+                    #size_hint: 1, 0.4
+                    #text: 'img\nx: 1 y: 0.4'
+                Img:
+                    #size_hint: 1, 0.4
+                    #text: 'img\nx: 1 y: 0.4'
+                Img:
+                    #size_hint: 1, 0.4
+                    #text: 'img\nx: 1 y: 0.4'
