@@ -22,3 +22,7 @@
 ![image](https://user-images.githubusercontent.com/18138614/163553974-39cb4288-e457-4bc4-b7c3-aeeb0a57cc81.png)
 ![image](https://user-images.githubusercontent.com/18138614/163554010-9adb3f42-d96d-434e-9ebe-3b03ba41c832.png)
 <br/>
+
+Переписать парсер в асинхронном варианте
+Сменить целевой сайт, расширить базу и гуй под большее количество данных на каждую игру
+Пересмотреть обращение к базе
